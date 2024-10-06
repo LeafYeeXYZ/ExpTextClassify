@@ -10,8 +10,8 @@ export const mainTrails: any[] = [
   {
     type: htmlButtonResponse,
     stimulus: `
-      <div class="mb-6 flex flex-col gap-3 items-center justify-center overflow-hidden">
-        <img src="/demo.jpg" class="w-3/4 h-fit" />
+      <div class="mb-6 flex flex-col items-center justify-center overflow-hidden">
+        <img src="/demo.jpg" class="w-3/4 h-fit max-w-md" />
       </div>
     `,
     choices: ['人类绘制', 'AI生成'],

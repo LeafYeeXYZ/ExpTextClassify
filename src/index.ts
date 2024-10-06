@@ -24,7 +24,7 @@ void async function main() {
     await exp.run(timeline)
     // 显示正在上传数据页面
     document.body.innerHTML = `
-      <div class="flex flex-col gap-3 items-center justify-center h-dvh w-dvw overflow-hidden">
+      <div class="flex flex-col items-center justify-center h-dvh w-dvw overflow-hidden">
         <div class="text-2xl p-4">正在上传数据, 请稍等...</div>
       </div>
     `
@@ -35,7 +35,7 @@ void async function main() {
     await new Promise(resolve => setTimeout(resolve, 800))
     // 显示感谢页面
     document.body.innerHTML = `
-      <div class="flex flex-col gap-3 items-center justify-center h-dvh w-dvw overflow-hidden">
+      <div class="flex flex-col items-center justify-center h-dvh w-dvw overflow-hidden">
         <div class="text-2xl p-4">实验已结束, 感谢您的参与!</div>
         <div class="text-base p-4">如有疑问, 请联系主试: xiaoyezi@leafyee.xyz</div>
       </div>
@@ -44,7 +44,7 @@ void async function main() {
   } catch (error) {
     // 显示错误信息
     document.body.innerHTML = `
-      <div class="flex flex-col gap-3 items-center justify-center h-dvh w-dvw overflow-hidden">
+      <div class="flex flex-col items-center justify-center h-dvh w-dvw overflow-hidden">
         <div class="text-2xl p-4">实验发生错误, 请联系管理员!</div>
         <div class="text-base p-4">错误信息: ${error instanceof Error ? error.message : JSON.stringify(error)}</div>
         <div class="text-base p-4">请将错误信息发送给主试: xiaoyezi@leafyee.xyz</div>
