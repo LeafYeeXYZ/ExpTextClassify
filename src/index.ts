@@ -3,34 +3,36 @@ import 'jspsych/css/jspsych.css'
 import { initJsPsych, type JsPsych } from 'jspsych'
 import preload from '@jspsych/plugin-preload'
 import { openingTrails } from './trails/opening'
-import { mainTrails } from './trails/main'
+import { getMainTrails } from './trails/main'
 import { endingTrails } from './trails/ending'
 
 const exp: JsPsych = initJsPsych({
   show_progress_bar: true,
   message_progress_bar: '实验进度'
 })
-const timeline: any[] = [
-  { type: preload, auto_preload: true, message: '<div class="text-2xl">实验加载中, 请稍等...</div>' },
-  ...openingTrails,
-  ...mainTrails,
-  ...endingTrails,
-]
 
 void async function main() {
   try {
-
+    // 声明两个自变量
+    const MATERIAL: 'ai' | 'human' = Math.random() > 0.5 ? 'ai' : 'human'
+    // 构建实验时间线
+    const timeline: any[] = [
+      { type: preload, auto_preload: true, message: '<div class="text-2xl">实验加载中, 请稍等...</div>' },
+      ...openingTrails,
+      ...getMainTrails(MATERIAL),
+      ...endingTrails,
+    ]
     // 运行实验
     await exp.run(timeline)
     // 显示正在上传数据页面
     document.body.innerHTML = `
       <div class="flex flex-col items-center justify-center h-dvh w-dvw overflow-hidden">
-        <div class="text-2xl p-4">正在上传数据, 请稍等...</div>
+        <div class="text-2xl p-4">正在上传数据, 请不要关闭浏览器...</div>
       </div>
     `
     // 获取并处理实验数据
     const data = exp.data.get().values()
-    console.log(data)
+    console.log(MATERIAL, data)
     // 上传数据
     await new Promise(resolve => setTimeout(resolve, 800))
     // 显示感谢页面
